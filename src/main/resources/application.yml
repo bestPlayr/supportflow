@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: supportflow
+  datasource:
+    url: ${DB_URL:jdbc:h2:file:./data/supportflow;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE}
+    username: ${DB_USER:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  mail:
+    host: ${SMTP_HOST:localhost}
+    port: ${SMTP_PORT:1025}
+    username: ${SMTP_USER:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 5000
+      mail.smtp.writetimeout: 5000
+      mail.smtp.auth: ${SMTP_AUTH:false}
+      mail.smtp.starttls.enable: ${SMTP_TLS:false}
+server:
+  error:
+    include-message: never
+management:
+  health:
+    mail:
+      enabled: ${MAIL_ENABLED:false}
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+logging:
+  level:
+    org.springframework.web: INFO
+    org.hibernate.SQL: WARN
+app:
+  jwt-secret: ${JWT_SECRET}
+  bootstrap:
+    admin-email: ${BOOTSTRAP_ADMIN_EMAIL:}
+    admin-password: ${BOOTSTRAP_ADMIN_PASSWORD:}
+  jobs:
+    enabled: true
+    delay-ms: 5000
+  ai:
+    url: ${AI_URL:https://api.openai.com/v1/chat/completions}
+    key: ${AI_API_KEY}
+    model: ${AI_MODEL:gpt-4.1-mini}
+  mail:
+    enabled: ${MAIL_ENABLED:false}
+    from: ${MAIL_FROM:support@supportflow.local}

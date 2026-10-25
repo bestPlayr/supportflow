@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:supportflow;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  mail:
+    host: localhost
+logging:
+  level:
+    root: WARN
+    org.springframework.web: WARN
+    org.hibernate.SQL: WARN
+app:
+  jwt-secret: test-secret-at-least-32-bytes-long-for-jwt
+  bootstrap:
+    admin-email:
+    admin-password:
+  jobs:
+    enabled: false
+  mail:
+    enabled: false
+  ai:
+    url: https://api.openai.com/v1/chat/completions
+    key: test-key-not-used-for-external-requests
+    model: gpt-4.1-mini
